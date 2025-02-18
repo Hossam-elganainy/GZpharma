@@ -28,7 +28,6 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d  # Mount folder for extensions
     ports:
       - "5432:5432"
-    command: ["bash", "-c", "docker-entrypoint.sh postgres & sleep 5 && psql -U $POSTGRES_USER -d $POSTGRES_DB -c 'CREATE EXTENSION IF NOT EXISTS pg_trgm;' && wait"]
 
 
 volumes:
