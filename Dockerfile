@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y libpq-dev gcc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -11,8 +11,8 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
 # Create application directory
-RUN mkdir /yanbo3
-WORKDIR /yanbo3
+RUN mkdir /GZpharma
+WORKDIR /GZpharma
 
 # Copy and install Python dependencies
 COPY requirements.txt .

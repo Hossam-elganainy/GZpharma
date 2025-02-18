@@ -18,8 +18,8 @@ DEBUG = env("DEBUG", cast=bool)
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=list)
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=list)
 CORS_ALLOW_ALL_ORIGINS = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 AUTH_USER_MODEL = 'users.User'
@@ -100,13 +100,7 @@ WSGI_APPLICATION = "gzpharma.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
+DATABASES = {"default": env.db()}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

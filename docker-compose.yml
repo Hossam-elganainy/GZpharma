@@ -4,11 +4,30 @@ services:
   django:
     build: .
     restart: always
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --workers 2 --bind  0.0.0.0:8000 --preload yanbo3.wsgi:application"
-    container_name: yanbo3
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --workers 2 --bind 0.0.0.0:8000 --preload gzpharma.wsgi:application"
+    container_name: gzpharma
     volumes:
-      - .:/yanbo3
+      - .:/GZpharma
     env_file:
       - .env
     ports:
       - "8111:8000"
+    depends_on:
+      - postgres  # Ensure Django waits for PostgreSQL to start
+
+  postgres:
+    image: postgres:15  # Use a recent version of PostgreSQL
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: gzpharma
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2591  # Change this to a secure password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount folder for extensions
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
