@@ -12,7 +12,7 @@ from django.conf.urls.static import static
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="GZPharama API",
+        title="GZPharama API f323cc016dfb9acd4677591ed60ac6fca2f87078",
         default_version="v1",
         description="API documentation for the GZPharama project",
         terms_of_service="https://www.google.com/policies/terms/",
