@@ -13,4 +13,4 @@ class ItemFilter(django_filters.FilterSet):
     def filter_by_similarity(self, queryset, name, value):
         return queryset.annotate(
             similarity=TrigramSimilarity('item_name', value)
-        ).filter(similarity__gt=0.25).order_by('-similarity')
+        ).filter(similarity__gt=0.28).order_by('-similarity')
