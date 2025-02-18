@@ -21,7 +21,7 @@ services:
     restart: always
     environment:
       POSTGRES_DB: gzpharma
-      POSTGRES_USER: postgres
+      POSTGRES_USER: gzpharma
       POSTGRES_PASSWORD: 1234  # Change this to a secure password
     volumes:
       - postgres_data:/var/lib/postgresql/data
