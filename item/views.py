@@ -17,6 +17,13 @@ class ItemList(generics.ListCreateAPIView):
         is_bulk = isinstance(request.data, list)  # Check if data is a list
         serializer = self.get_serializer(data=request.data, many=is_bulk)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
+
