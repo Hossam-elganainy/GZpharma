@@ -6,6 +6,7 @@ from .models import Item
 from .serializers import ItemSerializer
 from .filters import ItemFilter
 
+
 class ItemList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Item.objects.all()
@@ -27,4 +28,12 @@ class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemSerializer
 
 
+class ItemDestroyAll(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        self.queryset.delete()
+        return Response({"message": "All items have been deleted"}, status=status.HTTP_204_NO_CONTENT)
 
